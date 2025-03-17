@@ -4,5 +4,5 @@
 # SPDX-License-Identifier: MIT
 
 module CTypes
-  VERSION = "0.2.1"
+  VERSION = "0.2.2"
 end

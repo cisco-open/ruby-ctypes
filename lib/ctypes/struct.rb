@@ -515,6 +515,7 @@ module CTypes
         q.seplist(self.class.field_layout, -> { q.breakable("") }) do |name, _|
           names = name.is_a?(::Array) ? name : [name]
           names.each do |name|
+            next if name.is_a?(CTypes::Pad)
             q.text(".#{name} = ")
             q.pp(instance_variable_get(:"@#{name}"))
             q.text(", ")

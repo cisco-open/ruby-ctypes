@@ -512,8 +512,11 @@ module CTypes
         "struct {"
       end
       q.group(4, open, "}") do
-        q.seplist(self.class.field_layout, -> { q.breakable("") }) do |name, _|
-          names = name.is_a?(::Array) ? name : [name]
+        # strip out pad fields
+        fields = self.class.field_layout.reject do |(_, type)|
+          type.is_a?(CTypes::Pad)
+        end
+        q.seplist(fields, -> { q.breakable("") }) do |name, _|
           names.each do |name|
             next if name.is_a?(CTypes::Pad)
             q.text(".#{name} = ")

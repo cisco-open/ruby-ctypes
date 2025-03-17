@@ -30,6 +30,7 @@ jobs:
         with:
           ruby-version: "${{ matrix.ruby }}"
           bundler-cache: true
+      # install castxml for the importer tests
+      - run: sudo apt-get update && sudo apt-get install -y castxml
       - run: bundle install
-      - run: bundle exec rake debug
       - run: bundle exec rake spec

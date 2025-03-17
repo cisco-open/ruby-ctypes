@@ -8,13 +8,3 @@ RSpec::Core::RakeTask.new(:spec)
 require "standard/rake"
 
 task default: %i[spec standard]
-
-task :debug do
-  puts <<~END % [`ls`, `cat .rspec`]
-    files:
-    %s
-
-    .rspec:
-    %s
-  END
-end

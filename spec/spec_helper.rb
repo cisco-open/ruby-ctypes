@@ -42,5 +42,4 @@ RSpec.configure do |config|
 
   config.extend(CTypes::Helpers)
   config.extend(Helpers)
-  pp(extended: CTypes::Helpers.public_methods.sort)
 end

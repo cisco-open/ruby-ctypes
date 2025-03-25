@@ -120,7 +120,7 @@ RSpec.describe CTypes::Enum do
   end
 
   context "#[]" do
-    it "will return the Symbol for a valid value" do
+    it "will return the Symbol for a known value" do
       e = described_class.new(%i[a b c])
       expect(e[1]).to eq(:b)
     end
@@ -128,6 +128,16 @@ RSpec.describe CTypes::Enum do
     it "will return nil for an unknown value" do
       e = described_class.new(%i[a b c])
       expect(e[100]).to be_nil
+    end
+
+    it "will return the value for a known Symbol" do
+      e = described_class.new({x: 0x1000})
+      expect(e[:x]).to eq(0x1000)
+    end
+
+    it "will return nil for an unknown Symbol" do
+      e = described_class.new(%i[a b c])
+      expect(e[:unknown]).to be_nil
     end
   end
 end

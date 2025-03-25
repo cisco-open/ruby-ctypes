@@ -94,7 +94,7 @@ module CTypes
 
     # get the size of the bitfield in bytes
     def self.size
-      @type.size
+      @type&.size
     end
 
     # check if bitfield is a fixed size

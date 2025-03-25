@@ -185,15 +185,26 @@ module CTypes
       Enum.new(@type, @dry_type.mapping, permissive: true)
     end
 
-    # lookup the key for a given Integer value in this Enum
+    # Convert a enum key to value, or value to key
+    # @param arg [Integer, Symbol] key or value
+    # @return [Symbol, Integer, nil] value or key if known, nil if unknown
     #
     # @example
     #   e = Enum.new(%i[a b c])
     #   e[1]    # => :b
     #   e[5]    # => nil
-    def [](value)
-      @inverted_mapping ||= @dry_type.mapping.invert
-      @inverted_mapping[value]
+    #   e[:b]   # => 1
+    #   e[:x]   # => nil
+    def [](arg)
+      case arg
+      when Integer
+        @inverted_mapping ||= @dry_type.mapping.invert
+        @inverted_mapping[arg]
+      when Symbol
+        @dry_type.mapping[arg]
+      else
+        raise ArgumentError, "arg must be Integer or Symbol: %p" % [arg]
+      end
     end
   end
 end

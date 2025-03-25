@@ -187,4 +187,10 @@ module CTypes
       end
     end
   end
+
+  # To make CTypes easier to use without including Helpers everywhere, we're
+  # going to extend Helpers into the CTypes namespace.  This is to support
+  # interactive sessions through pry/irb where you need to quickly create types
+  # without having to constantly type out `Helpers`.
+  CTypes.extend(Helpers)
 end
